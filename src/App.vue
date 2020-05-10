@@ -1,34 +1,24 @@
 <template>
   <div id="app">
     <div>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <br>
-    <CardGame/> 
-    <br>
-        
-        </div>
-    <div>
-      
-      </div>
-    
+      <img alt="Vue logo" src="./assets/logo.png" />
+      <br />
+      <CardGame />
+      <br />
+    </div>
+    <div></div>
   </div>
 </template>
 
 <script>
-
-
-
-import CardGame from './components/CardGame.vue'
-
+import CardGame from "./components/CardGame.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    CardGame,
-    
-    
+    CardGame
   }
-}
+};
 </script>
 
 <style>
