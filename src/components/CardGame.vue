@@ -24,12 +24,27 @@
         </div>
       </div>
     </div>
+    <div>
+      <form @submit.prevent="handler">
+        <label for="tobeValidate">UserName</label>
+        <input v-model="tobeValidate" @blur="$v.tobeValidate.$touch()" />
+        <button >Sumbit</button>
+        <template v-if="$v.tobeValidate.$error">
+        <div class="error" v-if="!$v.tobeValidate.required">Field is required</div>
+        <div class="error" v-if="!$v.tobeValidate.minLength">Min lenght 4</div>
+
+       </template>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import ComponentPractise from "./ComponentPractise.vue";
 import axios from 'axios';
+import { validationMixin } from 'vuelidate'
+import { required, minLength} from 'vuelidate/lib/validators'
+
 
 
 export default {
@@ -38,7 +53,9 @@ export default {
     
 const response = await axios.get('https://localhost:44368/api/test')
 this.testResult = response.data
+
   },
+  mixins: [validationMixin],
   data: () => ({
     text: "hello",
     testResult : '',
@@ -67,15 +84,26 @@ this.testResult = response.data
         backSide:
           "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4f7705ec-8c49-4eed-a56e-c21f3985254c/dah43cy-a8e121cb-934a-40f6-97c7-fa2d77130dd5.png/v1/fill/w_1024,h_1420,strp/pokemon_card_backside_in_high_resolution_by_atomicmonkeytcg_dah43cy-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xNDIwIiwicGF0aCI6IlwvZlwvNGY3NzA1ZWMtOGM0OS00ZWVkLWE1NmUtYzIxZjM5ODUyNTRjXC9kYWg0M2N5LWE4ZTEyMWNiLTkzNGEtNDBmNi05N2M3LWZhMmQ3NzEzMGRkNS5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.6Au-hxTt7FuZ5paCMWMJrAiCi-ClaG35bEG2TgGg0VE"
       }
-    ]
+    ],
+    tobeValidate:'',
   }),
   components: {
     ComponentPractise
   },
   methods: {
+    handler(){
+      console.log("test")
+      this.$v.$touch();
+    },
     consoleLog(test) {
       console.log(test);
     }
+  },
+   validations: { 
+    tobeValidate:{
+      required,
+      minLength: minLength(4)
+      }
   }
 };
 </script>
