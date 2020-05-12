@@ -30,8 +30,8 @@
         <input v-model="tobeValidate" @blur="$v.tobeValidate.$touch()" />
         <button >Sumbit</button>
         <template v-if="$v.tobeValidate.$error">
-        <div class="error" v-if="!$v.tobeValidate.required">Field is required</div>
-        <div class="error" v-if="!$v.tobeValidate.minLength">Min lenght 4</div>
+        <div class="error" v-if="!$v.tobeValidate.required" style="color:red">Field is required</div>
+        <div class="error" v-if="!$v.tobeValidate.minLength" style="color:red">Min lenght 4</div>
 
        </template>
       </form>
