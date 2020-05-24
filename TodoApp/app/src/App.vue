@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary" 
-      dark
-    >
+    <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -27,44 +23,32 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
+      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
         <v-icon>{{addIcon}}</v-icon>
-
       </v-btn>
     </v-app-bar>
-
-    
-
 
     <v-content>
       <v-btn router-link to="/test" color="error" dark large align="center">Test</v-btn>
       <v-btn router-link to="/" color="primary" dark large align="center">Home</v-btn>
 
-    
-      <router-view> <HelloWorld/></router-view>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-import { mdiTooltipPlus } from '@mdi/js';
+import { mdiTooltipPlus } from "@mdi/js";
 
 export default {
-  name: 'App',
+  name: "App",
 
-  components: {
-    HelloWorld,
-  },
+  components: {},
 
   data: () => ({
-   addIcon:mdiTooltipPlus,
-  }),
+    addIcon: mdiTooltipPlus
+  })
 };
 </script>
