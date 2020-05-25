@@ -1,17 +1,13 @@
 <template>
-  <v-app>
+  <v-app class="grey lighten-4">
     <v-card class="mx-auto" max-width="400">
-      <v-img
-        class="white--text align-end"
-        height="200px"
-        :src="picture"
-      >
+      <v-img class="white--text align-end" height="200px" :src="image">
         <span class="time">{{ currentTime}}</span>
       </v-img>
       <v-list v-for="(task,i) in data" :key="i">
         <v-list-item>
-          <v-checkbox input-value="active" name="rado" color="success" v-model="task.done"></v-checkbox>
-
+          
+          <vs-checkbox input-value="active" color="success" v-model="task.done"></vs-checkbox>
           <v-list-item-content>
             <v-list-item-title :class="addColorAndLineThrough(task.done)">{{task.name}}</v-list-item-title>
           </v-list-item-content>
@@ -31,6 +27,7 @@
     <v-row class="pt-3" justify="center">
       <v-form align="center">
         <v-text-field
+          background-color="white"
           required
           v-on:keyup.enter="pushTaskToData()"
           clearable
@@ -46,6 +43,11 @@
   
 <script>
 import moment from "moment";
+import Vuesax from "vuesax";
+import Vue from "vue";
+import "vuesax/dist/vuesax.css";
+
+Vue.use(Vuesax);
 
 export default {
   name: "Test",
@@ -58,10 +60,10 @@ export default {
     picture: {},
     icons: ["mdi-delete ", "mdi-delete"],
     newTask: "",
-   
-        currentTime: "",
+
+    currentTime: moment(new Date()).format("MMMM Do YYYY"),
     image:
-      "https://www.onlygfx.com/wp-content/uploads/2016/05/hand-drawn-heart-1.png"
+      "https://media.istockphoto.com/photos/to-do-list-on-note-pad-with-coffee-and-pen-on-office-desk-picture-id863607936?k=6&m=863607936&s=612x612&w=0&h=ah7vkAcswYosdcuNZZKaVhmb6P9XSSkozVvhw4K47oM="
   }),
 
   methods: {
@@ -82,7 +84,6 @@ export default {
       this.data.splice(index, 1);
     },
     addColorAndLineThrough(task) {
-      
       if (task) {
         return ["grey--text", "line-through"];
       } else {
@@ -90,22 +91,20 @@ export default {
       }
     },
     updateCurrentTime() {
-      this.currentTime = moment().format("MMMM Do YYYY, h:mm:ss a");
+      this.currentTime = moment().format("MMMM Do YYYY");
     }
   },
   created() {
-    fetch(
-      "https://api.unsplash.com/photos/random?client_id=QJUVikMX1YrBMlMv7wnQPTvCbWYcvBHllt2tM6iivk0&query=quotes"
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.picture = data.urls.regular;
-      });
-    setInterval(() => this.updateCurrentTime(), 1 * 1000);
-  },
-  
+    // fetch(
+    //   "https://api.unsplash.com/photos/random?client_id=QJUVikMX1YrBMlMv7wnQPTvCbWYcvBHllt2tM6iivk0&query=quotes"
+    // )
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(data => {
+    //     this.picture = data.urls.regular;
+    //   });
+  }
 };
 </script>
 
@@ -126,5 +125,8 @@ export default {
 }
 .time {
   margin: 10px;
+  color: black;
+  font-family: monospace;
+  font-weight: bold;
 }
 </style>
