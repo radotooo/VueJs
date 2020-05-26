@@ -1,61 +1,52 @@
 <template>
-  <v-app class="grey lighten-4">
-    <v-card class="mx-auto" max-width="400">
+  <v-app class="grey lighten-4" >
+    <v-card class="mx-auto" max-width="400"  >
       <v-img class="white--text align-end" height="200px" :src="image">
         <span class="time">{{ currentTime}}</span>
       </v-img>
       <v-list v-for="(task,i) in data" :key="i">
         <v-list-item>
-          
+        <!-- Cool checkbox element from Vuesax framework -->
           <vs-checkbox input-value="active" color="success" v-model="task.done"></vs-checkbox>
           <v-list-item-content>
-            <v-list-item-title :class="addColorAndLineThrough(task.done)">{{task.name}}</v-list-item-title>
+            <v-list-item-title  v-if="task.edit==false" :class="addColorAndLineThrough(task.done)">{{task.name}}</v-list-item-title>
+            <v-text-field v-else v-on:keyup.enter="editTask(task.id)"  :dense="true" :placeholder="task.name"></v-text-field>
           </v-list-item-content>
-
-          <transition name="slide-fade">
-            <v-icon v-if="!task.done" color="primary" key="pencil">mdi-pencil</v-icon>
+                   <transition name="slide-fade">
+            <v-icon v-if="!task.done" @click="task.edit = !task.edit" color="primary" key="pencil">mdi-pencil</v-icon>
             <v-icon v-else @click="deleteTask(task.id)" color="red" key="delete">mdi-delete</v-icon>
           </transition>
-
           <transition name="slide-fade"></transition>
         </v-list-item>
         <v-divider></v-divider>
       </v-list>
-
       <v-card-actions></v-card-actions>
     </v-card>
-    <v-row class="pt-3" justify="center">
-      <v-form align="center">
-        <v-text-field
-          background-color="white"
-          required
-          v-on:keyup.enter="pushTaskToData()"
-          clearable
-          style="width:400px"
-          v-model="newTask"
-          outlined
-          label="Add task"
-        ></v-text-field>
-      </v-form>
-    </v-row>
+    <input-form></input-form>
   </v-app>
 </template>
   
 <script>
+
 import moment from "moment";
-import Vuesax from "vuesax";
+import vsCheckbox from "vuesax";
 import Vue from "vue";
 import "vuesax/dist/vuesax.css";
+import InputForm from "./InputForm"
 
-Vue.use(Vuesax);
+
+Vue.use(vsCheckbox);
 
 export default {
-  name: "Test",
+  name: "Home",
+   components: {
+   InputForm,
+  },
   data: () => ({
     data: [
-      { name: "rado", done: false, id: "1" },
-      { name: "rado2", done: false, id: "2" },
-      { name: "rado3", done: false, id: "3" }
+      { name: "rado", done: false, id: "1",edit: false },
+      { name: "rado2", done: false, id: "2",edit: false },
+      { name: "rado3", done: false, id: "3",edit: false }
     ],
     picture: {},
     icons: ["mdi-delete ", "mdi-delete"],
@@ -65,6 +56,7 @@ export default {
     image:
       "https://media.istockphoto.com/photos/to-do-list-on-note-pad-with-coffee-and-pen-on-office-desk-picture-id863607936?k=6&m=863607936&s=612x612&w=0&h=ah7vkAcswYosdcuNZZKaVhmb6P9XSSkozVvhw4K47oM="
   }),
+ 
 
   methods: {
     pushTaskToData: function() {
@@ -73,7 +65,8 @@ export default {
         this.data.push({
           name: this.newTask,
           done: false,
-          id: `${this.data.length + 1}`
+          id: `${this.data.length + 1}`,
+          edit: false,
         });
         this.newTask = "";
       }
@@ -92,6 +85,19 @@ export default {
     },
     updateCurrentTime() {
       this.currentTime = moment().format("MMMM Do YYYY");
+    },
+    editTask(task){
+      //! apito
+      console.log(task);
+        //  if (!task === null || task.trim().length > 0) {
+        // this.data.push({
+        //   name: this.newTask,
+        //   done: false,
+        //   id: `${this.data.length + 1}`,
+        //   edit: false,
+        // });
+        // this.newTask = "";
+      
     }
   },
   created() {
