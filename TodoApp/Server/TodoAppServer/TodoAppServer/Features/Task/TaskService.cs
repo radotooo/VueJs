@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using TodoAppServer.Data;
 using TodoAppServer.Features.Task;
@@ -19,20 +21,31 @@ namespace TodoAppServer.Features.Task
             this.dbContext = dbContext;
         }
 
-        public void AddTask(string description)
+        public async void AddTaskAsync(string description)
         {
-            throw new NotImplementedException();
+           var  task = new TaskToDo(){ Description = description};
+            dbContext.Tasks.Add(task);
+           await dbContext.SaveChangesAsync();
+           
         }
 
-        public void RemoveTask(int id)
+        public async Task<bool> RemoveTask(int id)
         {
-            throw new NotImplementedException();
+            var task = dbContext.Tasks.Find(id);
+            if(task == null)
+            {
+                return false;
+            }
+
+            dbContext.Tasks.Remove(task);
+              await dbContext.SaveChangesAsync();
+            return true;
         }
 
-        public IEnumerable<TaskServiceModel> GetAllTask()
+        public async Task<IEnumerable<TaskServiceModel>> GetAllTaskAsync()
         {
 
-            var data = dbContext.Tasks.ToList();
+            var data = await dbContext.Tasks.ToListAsync();
             //var result = new List<TaskServiceModel>();
             var result = data.Select(x => new TaskServiceModel(){Id = x.Id, Discription = x.Description });
             return result;

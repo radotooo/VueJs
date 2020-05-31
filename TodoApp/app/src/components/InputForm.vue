@@ -19,6 +19,20 @@
 <script>
 export default {
 
+  methods: {
+ pushTaskToData: function() {
+      var testTask = this.newTask.slice();
+      if (!testTask === null || testTask.trim().length > 0) {
+        this.data.push({
+          name: this.newTask,
+          done: false,
+          id: `${this.data.length + 1}`,
+          edit: false,
+        });
+        this.newTask = "";
+      }
+  },
+  }
 }
 </script>
 

@@ -8,9 +8,9 @@ namespace TodoAppServer.Features.Task
 {
     public interface ITaskService
     {
-       public IEnumerable<TaskServiceModel> GetAllTask();
-        public void AddTask(string description);
-        public void RemoveTask(int id);
+       public  Task<IEnumerable<TaskServiceModel>> GetAllTaskAsync();
+        public  void AddTaskAsync(string description);
+        public Task<bool> RemoveTask(int id);
 
     }
 }
