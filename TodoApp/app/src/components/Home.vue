@@ -4,13 +4,13 @@
       <v-img class="white--text align-end" height="200px" :src="image">
         <span class="time">{{ currentTime}}</span>
       </v-img>
-      <v-list v-for="(task,i) in data" :key="i">
+      <v-list v-for="task in tasks" :key="task.id">
         <v-list-item>
         <!-- Cool checkbox element from Vuesax framework -->
           <vs-checkbox input-value="active" color="success" v-model="task.done"></vs-checkbox>
           <v-list-item-content>
-            <v-list-item-title  v-if="task.edit==false" :class="addColorAndLineThrough(task.done)">{{task.name}}</v-list-item-title>
-            <v-text-field v-else v-on:keyup.enter="editTask(task.id)"  :dense="true" :placeholder="task.name"></v-text-field>
+            <v-list-item-title  >{{task.discription}}</v-list-item-title>
+            <!-- <v-text-field v-else v-on:keyup.enter="editTask(task.id)"  :dense="true" :placeholder="task.name"></v-text-field> -->
           </v-list-item-content>
                    <transition name="slide-fade">
             <v-icon v-if="!task.done" @click="task.edit = !task.edit" color="primary" key="pencil">mdi-pencil</v-icon>
@@ -23,7 +23,9 @@
       <v-card-actions></v-card-actions>
     </v-card>
     <input-form></input-form>
+   
   </v-app>
+  <!-- <v-btn @click="">Hello</v-btn> -->
 </template>
   
 <script>
@@ -33,6 +35,10 @@ import vsCheckbox from "vuesax";
 import Vue from "vue";
 import "vuesax/dist/vuesax.css";
 import InputForm from "./InputForm"
+import {mapActions} from 'vuex';
+import {mapState} from 'vuex';
+
+
 
 
 Vue.use(vsCheckbox);
@@ -43,6 +49,7 @@ export default {
    InputForm,
   },
   data: () => ({
+    
     data: [
       { name: "rado", done: false, id: "1",edit: false },
       { name: "rado2", done: false, id: "2",edit: false },
@@ -50,15 +57,18 @@ export default {
     ],
     picture: {},
     icons: ["mdi-delete ", "mdi-delete"],
-    newTask: "",
+    // tasks: [],
 
     currentTime: moment(new Date()).format("MMMM Do YYYY"),
     image:
       "https://media.istockphoto.com/photos/to-do-list-on-note-pad-with-coffee-and-pen-on-office-desk-picture-id863607936?k=6&m=863607936&s=612x612&w=0&h=ah7vkAcswYosdcuNZZKaVhmb6P9XSSkozVvhw4K47oM="
+      
   }),
+ computed: 
+   mapState(['tasks']),
  
-
   methods: {
+     ...mapActions(['getData']),
    
     
 
@@ -91,16 +101,11 @@ export default {
     }
   },
   created() {
-    // fetch(
-    //   "https://api.unsplash.com/photos/random?client_id=QJUVikMX1YrBMlMv7wnQPTvCbWYcvBHllt2tM6iivk0&query=quotes"
-    // )
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     this.picture = data.urls.regular;
-    //   });
-  }
+   
+   
+   this.$store.dispatch('getData')
+  
+   }
 };
 </script>
 

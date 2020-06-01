@@ -50,6 +50,13 @@ namespace TodoAppServer
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(
+                builder => builder
+                .WithOrigins("http://localhost:8080")
+                .AllowAnyHeader()
+                .AllowAnyHeader()
+                );
+            
 
             app.UseAuthorization();
 

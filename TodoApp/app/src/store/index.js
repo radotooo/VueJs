@@ -5,11 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    counter:10,
+  
+    tasks:[]
   },
   mutations: {
+    setCurrentData(state,data){
+        state.tasks=data;
+        
+    }
   },
   actions: {
+    getData(context){
+      fetch('https://localhost:5001/api/task')
+  .then(response => response.json())
+  .then(data => context.commit("setCurrentData",data));
+    }
   },
   modules: {
   },
