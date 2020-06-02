@@ -25,7 +25,7 @@ namespace TodoAppServer.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult Post(TaskRequestModel task)
+        public IActionResult Post([FromBody]TaskRequestModel task)
         {
             if (!ModelState.IsValid)
             {
@@ -33,7 +33,9 @@ namespace TodoAppServer.Controllers
 
             }
             var description = task.Description;
-            taskService.AddTaskAsync(description);
+            var edit = task.Edit;
+            var done = task.Done;
+            taskService.AddTaskAsync(description,done,edit);
 
             return Created("Get", task);
         }

@@ -9,5 +9,7 @@ namespace TodoAppServer.Features.Task.Models
     {
         [Required(ErrorMessage = InputIsRequaried)]
         public string Description { get; set; }
+        public bool Done { get; set; } = false;
+        public bool Edit { get; set; } = false;
     }
 }

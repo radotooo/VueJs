@@ -9,6 +9,8 @@ namespace TodoAppServer.Features.Task.Models
     {
         public int Id { get; set; }
         public string Discription { get; set; }
+        public bool Done { get; set; }
+        public bool Edit { get; set; }
 
     }
 }

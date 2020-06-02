@@ -21,9 +21,9 @@ namespace TodoAppServer.Features.Task
             this.dbContext = dbContext;
         }
 
-        public async void AddTaskAsync(string description)
+        public async void AddTaskAsync(string description,bool done , bool edit)
         {
-           var  task = new TaskToDo(){ Description = description};
+           var  task = new TaskToDo(){ Description = description , Done = done, Edit = edit };
             dbContext.Tasks.Add(task);
            await dbContext.SaveChangesAsync();
            
@@ -47,7 +47,7 @@ namespace TodoAppServer.Features.Task
 
             var data = await dbContext.Tasks.ToListAsync();
             //var result = new List<TaskServiceModel>();
-            var result = data.Select(x => new TaskServiceModel(){Id = x.Id, Discription = x.Description });
+            var result = data.Select(x => new TaskServiceModel(){Id = x.Id, Discription = x.Description , Done = x.Done , Edit = x.Edit});
             return result;
         }
     }
