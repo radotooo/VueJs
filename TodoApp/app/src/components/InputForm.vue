@@ -7,7 +7,7 @@
         v-on:keyup.enter="pushTaskToData()"
         clearable
         style="width:400px"
-        v-model="newTask"
+        v-model="task"
         outlined
         label="Add task"
       ></v-text-field>
@@ -20,17 +20,19 @@
 
 
 export default {
+  data() {
+    return {
+      task: "",
+    }
+  },
   methods: {
     pushTaskToData: function() {
-      var testTask = this.newTask.slice();
-      if (!testTask === null || testTask.trim().length > 0) {
-        this.data.push({
-          name: this.newTask,
-          done: false,
-          id: `${this.data.length + 1}`,
-          edit: false
+      var currentTask = this.task.slice();
+      if (!currentTask === null || currentTask.trim().length > 0) {
+        this.$store.dispatch('createData',{
+          Description: this.task,
         });
-        this.newTask = "";
+        this.task="";
       }
     },
     

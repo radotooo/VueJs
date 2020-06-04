@@ -9,12 +9,12 @@
         <!-- Cool checkbox element from Vuesax framework -->
           <vs-checkbox input-value="active" color="success" v-model="task.done"></vs-checkbox>
           <v-list-item-content>
-            <v-list-item-title  >{{task.discription}}</v-list-item-title>
+            <v-list-item-title :class="addColorAndLineThrough(task.done)" >{{task.discription}} {{task.id}}</v-list-item-title>
             <!-- <v-text-field v-else v-on:keyup.enter="editTask(task.id)"  :dense="true" :placeholder="task.name"></v-text-field> -->
           </v-list-item-content>
                    <transition name="slide-fade">
             <v-icon v-if="!task.done" @click="task.edit = !task.edit" color="primary" key="pencil">mdi-pencil</v-icon>
-            <v-icon v-else @click="deleteTask(task.id)" color="red" key="delete">mdi-delete</v-icon>
+            <v-icon v-else @click="removeTask(task.id)" color="red" key="delete">mdi-delete</v-icon>
           </transition>
           <transition name="slide-fade"></transition>
         </v-list-item>
@@ -68,14 +68,15 @@ export default {
    mapState(['tasks']),
  
   methods: {
-     ...mapActions(['getData']),
-   
+     ...mapActions(['getData','deleteData']),
+  
+     removeTask(id) {
+       console.log(id)
+      // this.$store.dispatch('deleteData',id);
+      this.deleteData(id);
+      
+     },
     
-
-    deleteTask(user) {
-      var index = this.data.findIndex(x => x.id == user);
-      this.data.splice(index, 1);
-    },
     addColorAndLineThrough(task) {
       if (task) {
         return ["grey--text", "line-through"];
@@ -86,26 +87,11 @@ export default {
     updateCurrentTime() {
       this.currentTime = moment().format("MMMM Do YYYY");
     },
-    editTask(task){
-      //! apito
-      console.log(task);
-        //  if (!task === null || task.trim().length > 0) {
-        // this.data.push({
-        //   name: this.newTask,
-        //   done: false,
-        //   id: `${this.data.length + 1}`,
-        //   edit: false,
-        // });
-        // this.newTask = "";
-      
-    }
+   
   },
   created() {
-   
-   
-   this.$store.dispatch('getData')
-  
-   }
+      this.getData()
+     }
 };
 </script>
 

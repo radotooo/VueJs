@@ -21,11 +21,11 @@ namespace TodoAppServer.Controllers
         [HttpGet(Name = "Get")]
         public async Task<IActionResult> Get()
         {
-            var result = await taskService.GetAllTaskAsync();
-            return Ok(result);
+            var todoList = await taskService.GetAllTaskAsync();
+            return Ok(todoList);
         }
         [HttpPost]
-        public IActionResult Post([FromBody]TaskRequestModel task)
+        public async Task<IActionResult> Post([FromBody]TaskRequestModel task)
         {
             if (!ModelState.IsValid)
             {
@@ -36,8 +36,10 @@ namespace TodoAppServer.Controllers
             var edit = task.Edit;
             var done = task.Done;
             taskService.AddTaskAsync(description,done,edit);
+            var todoList = await taskService.GetAllTaskAsync();
 
-            return Created("Get", task);
+
+            return Created("Get", todoList);
         }
         [HttpDelete]
         [Route("{id}")]
@@ -48,7 +50,9 @@ namespace TodoAppServer.Controllers
             {
                 return BadRequest();
             }
-            return Ok();
+            var todoList = await taskService.GetAllTaskAsync();
+
+            return Ok(todoList);
         }
 
 

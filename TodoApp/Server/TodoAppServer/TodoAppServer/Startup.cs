@@ -55,6 +55,7 @@ namespace TodoAppServer
                 .WithOrigins("http://localhost:8080")
                 .AllowAnyHeader()
                 .AllowAnyHeader()
+                .AllowAnyMethod()
                 );
             
 
