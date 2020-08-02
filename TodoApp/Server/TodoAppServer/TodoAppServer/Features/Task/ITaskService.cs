@@ -11,6 +11,8 @@ namespace TodoAppServer.Features.Task
        public  Task<IEnumerable<TaskServiceModel>> GetAllTaskAsync();
         public  void AddTaskAsync(string description,bool done, bool edit);
         public Task<bool> RemoveTask(int id);
+        public Task<TaskToDo> GetTaskAsync(int id);
+        public void UpdateTaskAsync(bool state,int id);
 
     }
 }

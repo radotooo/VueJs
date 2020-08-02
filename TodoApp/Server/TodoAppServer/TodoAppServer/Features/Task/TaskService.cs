@@ -21,24 +21,24 @@ namespace TodoAppServer.Features.Task
             this.dbContext = dbContext;
         }
 
-        public async void AddTaskAsync(string description,bool done , bool edit)
+        public async void AddTaskAsync(string description, bool done, bool edit)
         {
-           var  task = new TaskToDo(){ Description = description , Done = done, Edit = edit };
+            var task = new TaskToDo() { Description = description, Done = done, Edit = edit };
             dbContext.Tasks.Add(task);
-           await dbContext.SaveChangesAsync();
-           
+            await dbContext.SaveChangesAsync();
+
         }
 
         public async Task<bool> RemoveTask(int id)
         {
             var task = dbContext.Tasks.Find(id);
-            if(task == null)
+            if (task == null)
             {
                 return false;
             }
 
             dbContext.Tasks.Remove(task);
-              await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
             return true;
         }
 
@@ -47,8 +47,29 @@ namespace TodoAppServer.Features.Task
 
             var data = await dbContext.Tasks.ToListAsync();
             //var result = new List<TaskServiceModel>();
-            var result = data.Select(x => new TaskServiceModel(){Id = x.Id, Discription = x.Description , Done = x.Done , Edit = x.Edit});
+            var result = data.Select(x => new TaskServiceModel() { Id = x.Id, Discription = x.Description, Done = x.Done, Edit = x.Edit });
             return result;
+        }
+
+        public async Task<TaskToDo> GetTaskAsync(int id)
+        {
+
+            var data = await dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == id);
+            return data;
+
+        }
+
+        public async void UpdateTaskAsync(bool state, int id)
+        {
+            var data = await GetTaskAsync(id);
+           
+
+            if (data.Done != state)
+            {
+                data.Done = state;
+            }
+            await dbContext.SaveChangesAsync();
+
         }
     }
 }

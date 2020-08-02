@@ -19,6 +19,7 @@ namespace TodoAppServer
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,7 +32,21 @@ namespace TodoAppServer
         {
             services.AddControllers();
             services.AddTransient<ITaskService, TaskService>();
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: MyAllowSpecificOrigins,
+            //                      builder =>
+            //                      {
+            //                          builder.WithOrigins("http://localhost:8080",
+            //                                              "http://localhost:8081")
+            //                                                .AllowAnyMethod()
+            //                                                .AllowAnyOrigin()
+                                                            
+            //                                                .AllowAnyHeader();
 
+
+            //                      }); 
+            //});
 
             services.AddDbContext<TodoAppDbContext>();
 
@@ -46,18 +61,22 @@ namespace TodoAppServer
                 
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(
+      options => options.WithOrigins("http://localhost:8080").AllowAnyMethod().AllowAnyHeader()
+  );
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(
-                builder => builder
-                .WithOrigins("http://localhost:8080")
-                .AllowAnyHeader()
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                );
-            
+
+            //app.UseCors(
+            //    builder => builder
+            //    .WithOrigins("http://localhost:8080/?#/")
+            //    .AllowAnyHeader()
+            //    .AllowAnyHeader()
+            //    .AllowAnyMethod()
+            //    );
+            //app.UseCors(MyAllowSpecificOrigins);
+
 
             app.UseAuthorization();
 

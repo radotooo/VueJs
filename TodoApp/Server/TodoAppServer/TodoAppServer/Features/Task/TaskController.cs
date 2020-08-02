@@ -41,6 +41,7 @@ namespace TodoAppServer.Controllers
 
             return Created("Get", todoList);
         }
+
         [HttpDelete]
         [Route("{id}")]
         public async  Task<IActionResult> Delete(int id)
@@ -56,5 +57,20 @@ namespace TodoAppServer.Controllers
         }
 
 
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromBody] TaskStateModel solve,int id)
+        {
+            var data = taskService.GetTaskAsync(id);
+            if(data == null)
+            {
+                return NotFound();
+            }
+
+           taskService.UpdateTaskAsync(solve.State, id);
+            var todoList = await taskService.GetAllTaskAsync();
+
+            return Ok(todoList);
+        }
     }
 }
