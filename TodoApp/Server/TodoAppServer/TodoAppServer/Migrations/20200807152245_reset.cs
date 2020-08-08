@@ -2,7 +2,7 @@
 
 namespace TodoAppServer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class reset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,10 @@ namespace TodoAppServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: false),
+                    Done = table.Column<bool>(nullable: false),
+                    Edit = table.Column<bool>(nullable: false),
+                    test = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

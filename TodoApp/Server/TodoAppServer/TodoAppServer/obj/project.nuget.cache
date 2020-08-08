@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "l9LzcjyCDVIYFO3h6a8SKv/3rQIsNNk4FVWY3ezkzN+bXpGOLx1z+f4vfsiV3PDmGTlqJbJm17RrWWSugwbkBw==",
+  "dgSpecHash": "97whHG3ZunM9nwoLTkEBzz6G2KgixQ7RqqJ7tPfGG5E7MRAN44OqgV289kSwFkHp2Y7bKhQCmC5mJJ2mBskBPA==",
   "success": true,
   "projectFilePath": "C:\\VueProject\\VueJs\\TodoApp\\Server\\TodoAppServer\\TodoAppServer\\TodoAppServer.csproj",
   "expectedPackageFiles": [
@@ -29,6 +29,7 @@
     "C:\\Users\\Radotooo\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.4\\microsoft.extensions.logging.abstractions.3.1.4.nupkg.sha512",
     "C:\\Users\\Radotooo\\.nuget\\packages\\microsoft.extensions.options\\3.1.4\\microsoft.extensions.options.3.1.4.nupkg.sha512",
     "C:\\Users\\Radotooo\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.4\\microsoft.extensions.primitives.3.1.4.nupkg.sha512",
+    "C:\\Users\\Radotooo\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\Radotooo\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.2\\sqlitepclraw.bundle_e_sqlite3.2.0.2.nupkg.sha512",
     "C:\\Users\\Radotooo\\.nuget\\packages\\sqlitepclraw.core\\2.0.2\\sqlitepclraw.core.2.0.2.nupkg.sha512",
     "C:\\Users\\Radotooo\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.2\\sqlitepclraw.lib.e_sqlite3.2.0.2.nupkg.sha512",

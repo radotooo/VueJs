@@ -18,5 +18,6 @@ namespace TodoAppServer.Data
         [Required]
 
         public bool Edit { get; set; }
+        public int test { get; set; }
     }
 }

@@ -19,7 +19,8 @@ namespace TodoAppServer
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,23 +33,9 @@ namespace TodoAppServer
         {
             services.AddControllers();
             services.AddTransient<ITaskService, TaskService>();
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: MyAllowSpecificOrigins,
-            //                      builder =>
-            //                      {
-            //                          builder.WithOrigins("http://localhost:8080",
-            //                                              "http://localhost:8081")
-            //                                                .AllowAnyMethod()
-            //                                                .AllowAnyOrigin()
-                                                            
-            //                                                .AllowAnyHeader();
-
-
-            //                      }); 
-            //});
-
-            services.AddDbContext<TodoAppDbContext>();
+           
+            services.AddDbContext<TodoAppDbContext>(option => 
+            option.UseSqlite(Configuration.GetConnectionString("ToDoApp")));
 
 
         }

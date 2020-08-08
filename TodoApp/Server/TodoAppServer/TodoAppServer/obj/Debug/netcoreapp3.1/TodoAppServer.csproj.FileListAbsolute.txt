@@ -56,6 +56,6 @@ C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\bin\Debug\netcore
 C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\obj\Debug\netcoreapp3.1\TodoAppServer.csproj.CopyComplete
 C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
-C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\obj\Debug\netcoreapp3.1\TodoAppServer.csprojAssemblyReference.cache
 C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\obj\Debug\netcoreapp3.1\TodoAppServer.csproj.CoreCompileInputs.cache
 C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\obj\Debug\netcoreapp3.1\TodoAppServer.MvcApplicationPartsAssemblyInfo.cache
+C:\VueProject\VueJs\TodoApp\Server\TodoAppServer\TodoAppServer\obj\Debug\netcoreapp3.1\TodoAppServer.csprojAssemblyReference.cache
