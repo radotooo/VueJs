@@ -1,0 +1,8 @@
+.vscode
+bin
+obj
+Dockerfile
+entrypoint.sh
+appsettings.json
+*.db
+Properties
