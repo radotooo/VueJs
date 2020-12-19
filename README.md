@@ -1,6 +1,6 @@
 # To-do list 📆
 
-A simple to do list app
+A simple To-do list app
 
 ## Built With:
 
