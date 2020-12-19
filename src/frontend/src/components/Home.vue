@@ -56,8 +56,6 @@ export default {
   },
   data: () => ({
     icons: ['mdi-delete ', 'mdi-delete'],
-    // tasks: [],
-
     currentTime: moment(new Date()).format('MMMM Do YYYY'),
     image:
       'https://media.istockphoto.com/photos/to-do-list-on-note-pad-with-coffee-and-pen-on-office-desk-picture-id863607936?k=6&m=863607936&s=612x612&w=0&h=ah7vkAcswYosdcuNZZKaVhmb6P9XSSkozVvhw4K47oM=',
@@ -72,7 +70,6 @@ export default {
     },
     patch(state, id) {
       state.done = !state.done;
-
       this.patchData({
         State: state.done,
         Id: id,

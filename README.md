@@ -1,6 +1,6 @@
-# To-do list
+# To-do list 📆
 
-My personal website.
+A simple to do list app
 
 ## Built With:
 

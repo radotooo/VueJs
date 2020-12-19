@@ -12,34 +12,26 @@
         label="Add task"
       ></v-text-field>
     </v-form>
-  
   </v-row>
 </template>
 
 <script>
-
-
 export default {
   data() {
     return {
-      task: "",
-    }
+      task: '',
+    };
   },
   methods: {
     pushTaskToData: function() {
       var currentTask = this.task.slice();
       if (!currentTask === null || currentTask.trim().length > 0) {
-        this.$store.dispatch('createData',{
+        this.$store.dispatch('createData', {
           Description: this.task,
         });
-        this.task="";
+        this.task = '';
       }
     },
-    
-  }
- 
+  },
 };
 </script>
-
-<style>
-</style>
